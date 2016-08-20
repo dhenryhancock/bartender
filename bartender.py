@@ -20,6 +20,7 @@ answer = { }
 
 def ask_questions():
    """User indicates drink preferences, then I print it"""
+   print("I'm going to ask a few questions to help you pick a drink. Please answer yes or no.")
    true=["y","yes", "Yes","Y"]
    for key in questions:
         question=input("{} " .format(questions[key]))
@@ -30,11 +31,14 @@ def ask_questions():
    print(answer)
 
 def construct_drink():
+    """Takes the choices from ask_questions and puts them into a drink."""
+    print("Based on your answers, now I'll make your drink.")
     drink=[]
     for key in answer:
-        ingredient=(ingredients[key])
-        drink.append(random.choice(ingredient))
-    print(drink)
+        if (answer[key])==True:
+            ingredient=(ingredients[key])
+            drink.append(random.choice(ingredient))
+    print("Here's what is in your drink: {}" .format(drink))
 
 if __name__=="__main__":
     ask_questions()
