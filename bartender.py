@@ -24,7 +24,7 @@ def ask_questions():
    true=["y","yes", "Yes","Y"]
    for key in questions:
         question=input("{} " .format(questions[key]))
-        if question in true:
+        if question.lower() in true:
             answer[key]=True
         else:
             answer[key]=False
@@ -38,8 +38,16 @@ def construct_drink():
         if (answer[key])==True:
             ingredient=(ingredients[key])
             drink.append(random.choice(ingredient))
-    print("Here's what is in your drink: {}" .format(drink))
+    return "Here's what is in your drink: {}" .format(drink)
+
+def name_drink():
+    """Names the customer's drink"""
+    nouns=["dog", "cat", "bird"]
+    adjectives=["fluffy", "happy", "tired"]
+    name=random.choice(adjectives) + " " + random.choice(nouns)
+    return ("The name of your drink is {}" .format(name))
 
 if __name__=="__main__":
     ask_questions()
-    construct_drink()
+    print(construct_drink())
+    print(name_drink())
