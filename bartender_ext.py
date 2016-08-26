@@ -16,21 +16,6 @@ ingredients = {
     "fruity": ["slice of orange", "dash of cassis", "cherry on top"],
 }
 
-stock = {
-    "glug of rum": 20,
-    "slug of whisky": 20,
-    "splash of gin": 20,
-    "olive on a stick": 20,
-    "salt-dusted rim": 20,
-    "rasher of bacon":20,
-    "sugar cube":20,
-    "spoonful of honey":20,
-    "spash of cola":20,
-    "slice of orange":20,
-    "dash of cassis":20,
-    "cherry on top":20,
-}
-
 answer = { }
 
 customers = { }
@@ -56,9 +41,6 @@ def construct_drink():
         if (answer[key])==True:
             ingredient=(ingredients[key])
             drink.append(random.choice(ingredient))
-    for ingredient in stock:
-        if ingredient in drink:
-            stock[ingredient] -=1
     return "Here's what is in your drink: {}" .format(drink)
 
 def name_drink():
@@ -69,27 +51,23 @@ def name_drink():
     return ("The name of your drink is {}" .format(name))
 
 def another_drink():
-    """Asks if the customer would like a drink and remembers their preferences if they are a returning customer"""
+    """Asks if the customer would like another drink and remembers their preferences"""
     while True:
-        still_drinking=(input("Would you like a drink? "))
+        still_drinking=(input("Would you like another drink? "))
         true=["y","yes"]
         if still_drinking.lower() in true:
             name=input("What is your name? ")
             try:
-                new_drink=customers[name]
+                new_drink=dict(customers[name])
                 other_drink=[]
                 for key in answer:
-                    if new_drink[key]:
+                    if (new_drink[key])==True:
                         ingredient=(ingredients[key])
                         other_drink.append(random.choice(ingredient))
-                for ingredient in stock:
-                    if ingredient in other_drink:
-                        stock[ingredient] -=1
                 print ("You have these things in your new drink: {}" .format(other_drink))
             except KeyError:
                 ask_questions()
                 print(construct_drink())
-                print(name_drink())
         else:
             print("Here is your check")
             break
@@ -100,4 +78,4 @@ if __name__=="__main__":
     print(construct_drink())
     print(name_drink())
     another_drink()
-    print(stock)
+        
